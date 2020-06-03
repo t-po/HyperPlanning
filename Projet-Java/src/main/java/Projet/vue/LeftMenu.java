@@ -4,11 +4,12 @@
  * and open the template in the editor.
  */
 package Projet.vue;
-
+import java.awt.Color;
+import javax.swing.*;
 /**
  *
  * @author Hippo
  */
-public class LeftMenu {
-    
+public class LeftMenu extends JPanel{
+   
 }
