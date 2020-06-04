@@ -1,2 +1,12 @@
-com\mycompany\projet\java\vueSwing.class
-com\mycompany\projet\java\Fenetre.class
+CalendrierJpanel\SButton.class
+Projet\vue\WeakCalendarPlace.class
+Projet\vue\LeftMenu.class
+Projet\vue\MonthCalendar.class
+CalendrierJpanel\SLabel.class
+tests\vue\vueSwing.class
+CalendrierJpanel\Calendrier.class
+Projet\vue\Main.class
+Projet\vue\NextCourses.class
+Projet\vue\WeakCalendar.class
+tests\vue\Panneau.class
+tests\vue\Fenetre.class

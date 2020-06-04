@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Projet.vue;
-
+package tests.vue;
 /**
  *
  * @author Hippo
  */
-public class WeakCalendarPlace {
-    
+public class Main {
+    public static void main(String[] args){
+    Fenetre fenetre = new Fenetre();
+    }
 }

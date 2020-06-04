@@ -29,7 +29,7 @@ public class Calendrier extends JPanel implements ActionListener{
 		this.mois  = iMois;
 		this.annee  = iAnnee;
 		container.setLayout(null);
-		setOpaque(false); //si vous utiliser une image comme fond
+		setOpaque(true); //si vous utiliser une image comme fond
 		setBounds(x0,y0,420,360);
 		setLayout(null);
 		container.add(this);
@@ -163,7 +163,7 @@ public class Calendrier extends JPanel implements ActionListener{
     				m=mois-1;
     				a=annee;}
     		container.add(new Calendrier(x0,y0,m,a,container));
-    		repaint();
+    		container.repaint();
     	}
     }
     		
