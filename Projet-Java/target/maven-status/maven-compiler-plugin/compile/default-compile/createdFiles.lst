@@ -1,12 +1,9 @@
 CalendrierJpanel\SButton.class
-Projet\vue\WeakCalendarPlace.class
-Projet\vue\LeftMenu.class
-Projet\vue\MonthCalendar.class
+tests\vue\Main.class
+tests\vue\Table$1.class
 CalendrierJpanel\SLabel.class
-tests\vue\vueSwing.class
 CalendrierJpanel\Calendrier.class
-Projet\vue\Main.class
-Projet\vue\NextCourses.class
-Projet\vue\WeakCalendar.class
+CalendrierJpanel\Main.class
+tests\vue\Table.class
 tests\vue\Panneau.class
 tests\vue\Fenetre.class
