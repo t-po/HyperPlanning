@@ -22,7 +22,7 @@ public class Fenetre extends JFrame{
    
     
     public Fenetre(){
-        this.setLocationRelativeTo(null);
+     this.setLocationRelativeTo(null);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setTitle("Table");
     this.setSize(800, 600);
