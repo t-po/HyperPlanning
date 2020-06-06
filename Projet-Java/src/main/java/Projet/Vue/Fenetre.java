@@ -109,6 +109,15 @@ public JPanel parameters (){
     parametersPan.add(lbl);
     parametersPan.add(jtf);
     parametersPan.add(button);
+    
+    // Pour récupérer les paramètres entrées
+    /*button.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+          System.out.println(combo.getSelectedItem()); // Recupérer la selection de comob
+          System.out.println(jtf.getText());    // Recupérer le nom entré
+        }
+     });
+    */
    
   return parametersPan;
 }
