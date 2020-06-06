@@ -20,7 +20,9 @@ import javax.swing.JPanel;
  * @author adrienloizeau
  */
 public class Connexion extends JFrame{
-   
+    
+    private JTextField tfMail = new JTextField();
+    private JPasswordField tfPassword = new JPasswordField(10);
     
   public Connexion(){
 
@@ -40,10 +42,9 @@ public JPanel parameters(){
     
     JButton btnLogin = new JButton("Se connecter");
     JLabel lblMail = new JLabel("Mail: ");
-    JTextField tfMail = new JTextField();
-    
+  
     JLabel lblPassword = new JLabel("Mot de passe: ");
-    JPasswordField tfPassword = new JPasswordField(10);
+
     
     lblMail.setLabelFor(tfMail);
     lblPassword.setLabelFor(tfPassword);
@@ -60,9 +61,21 @@ public JPanel parameters(){
     interPan.add(lblPassword);
     interPan.add(tfPassword);
     interPan.add(btnLogin);
-
+    
+   btnLogin.addActionListener(new BoutonListener());
+      
+      
 
     return interPan;
 }
+
+  
+  class BoutonListener implements ActionListener{
+    //Redéfinition de la méthode actionPerformed()
+    public void actionPerformed(ActionEvent e) {
+      System.out.println("TEXT : jtf " + tfMail.getText());
+      System.out.println("TEXT : jtf2 " + tfPassword.getText());
+    }
+  }
         
 }
