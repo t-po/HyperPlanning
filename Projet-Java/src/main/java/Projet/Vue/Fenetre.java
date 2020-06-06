@@ -33,7 +33,7 @@ public class Fenetre extends JFrame{
     
     //Creation des parametres en fin de page
     this.getContentPane().add(parameters(), BorderLayout.SOUTH);
-    this.getContentPane().add(toolBar(), BorderLayout.NORTH);
+    this.getContentPane().add(toolBarre(), BorderLayout.NORTH);
     this.setBackground(Color.green);
     this.setVisible(true);
     
@@ -112,8 +112,10 @@ public JPanel parameters (){
    
   return parametersPan;
 }
-private JMenuBar toolBar(){
+private JMenuBar toolBarre(){
     
+  // tool Barre de navigation entre les pages 
+  
   JMenuBar menuBar = new JMenuBar();
   JMenu nav = new JMenu("Navigation");
 
@@ -126,7 +128,13 @@ private JMenuBar toolBar(){
   nav.add(stat);
   menuBar.add(nav);
 
-  
+  /* Pour interagir avec la tool barre
+  planning.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+          
+        }
+     });
+  */
   return  menuBar;
 }
 }
