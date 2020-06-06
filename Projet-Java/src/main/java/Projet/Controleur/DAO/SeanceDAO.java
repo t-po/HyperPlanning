@@ -3,6 +3,7 @@ package Projet.Controleur.DAO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import java.sql.Statement;
@@ -30,6 +31,24 @@ public class SeanceDAO extends DAO<Seance>{
 
     public boolean delete(Seance obj){
         return false;
+    }
+
+    public Set<Seance> listeSeance(Utilisateur utilisateur){
+        Set<Seance> listSeance = new HashSet<Seance>(); 
+        int idGroupe = 0;
+        try{
+            ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM etudiant WHERE ID_UTILISATEUR = "+utilisateur.getId());
+            if(result.first()){
+                idGroupe = result.getInt("ID_GROUPE");
+            }
+            result = this.connect.createStatement().executeQuery("SELECT * FROM SEANCE_GROUPE WHERE ID_GROUPE = "+ idGroupe);
+            while(result.next()){
+                listSeance.add(find(result.getInt("ID_SEANCE")));
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return listSeance;
     }
 
     public Seance find(int id){

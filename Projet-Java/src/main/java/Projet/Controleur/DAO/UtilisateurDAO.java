@@ -23,6 +23,19 @@ public class UtilisateurDAO extends DAO<Utilisateur>{
         return false;
     }
 
+    public Utilisateur connexion(String email, String passwd){
+        Utilisateur utilisateur = new Utilisateur();
+        try{
+            ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM utilisateur WHERE EMAIL = "+email+"AND PASSWD = "+passwd);
+            if(result.first()){
+                utilisateur = new Utilisateur(result.getInt("ID"),result.getString("EMAIL"),result.getString("PASSWD"),result.getString("NOM"),result.getString("PRENOM"),result.getInt("DROIT"));
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return utilisateur;
+    }
+
     public Utilisateur find(int id){
         Utilisateur utilisateur = new Utilisateur();
         try{
