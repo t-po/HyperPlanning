@@ -28,7 +28,7 @@ public class GroupeDAO extends DAO<Groupe>{
         try{
             ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM groupe WHERE ID = " + id);
             if(result.first()){
-                groupe = new Groupe(id,result.getString("NOM"),result.getInt("ID_GROUPE"));
+                groupe = new Groupe(id,result.getString("NOM"),result.getInt("ID_PROMOTION"));
             }
         } catch (SQLException e){
             e.printStackTrace();
