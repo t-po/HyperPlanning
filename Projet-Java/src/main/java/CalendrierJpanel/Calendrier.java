@@ -23,6 +23,7 @@ public class Calendrier extends JPanel implements ActionListener{
 	
 	public Calendrier(int x0,int y0,int iMois,int iAnnee,JPanel container){
 		super();
+                System.out.println("1");
 		this.container = container;
 		this.x0  = x0;
 		this.y0  = y0;
@@ -33,12 +34,15 @@ public class Calendrier extends JPanel implements ActionListener{
 		setBounds(x0,y0,420,360);
 		setLayout(null);
 		container.add(this);
-		
-		prec = new SButton("<<",100,0,50,28,true,this);		
+	System.out.println("2");	
+		prec = new SButton("<<",100,0,50,28,true,this);	
+            System.out.println("1");
 		new SLabel(string(iMois)+" "+iAnnee,1,14,150,0,120,30,this);
+            System.out.println("2");
 		suiv = new SButton(">>",270,0,50,28,true,this);	
 		prec.addActionListener(this);
-		suiv.addActionListener(this);	
+		suiv.addActionListener(this);
+        System.out.println("3");
 		new SLabel("Dim",1,12,0,30,60,30,this);
 		new SLabel("Lun",1,12,60,30,60,30,this);
 		new SLabel("Mar",1,12,120,30,60,30,this);
@@ -46,9 +50,11 @@ public class Calendrier extends JPanel implements ActionListener{
 		new SLabel("Jeu",1,12,240,30,60,30,this);
 		new SLabel("Ven",1,12,300,30,60,30,this);
 		new SLabel("Sam",1,12,360,30,60,30,this);
-		
+	System.out.println("4");
 		remplirVect();
+        System.out.println("5");
 		afficherGrille(iMois,iAnnee);
+        System.out.println("6");
 	}
 	
 	//procedure de remplissage du vecteur par des boutton standard
@@ -142,6 +148,7 @@ public class Calendrier extends JPanel implements ActionListener{
     
     public void actionPerformed(ActionEvent e){
     	if(e.getSource() == suiv){
+            System.out.println("icicici");
     		container.removeAll();
     		int m,a;
     		if(mois==12){
@@ -155,6 +162,7 @@ public class Calendrier extends JPanel implements ActionListener{
     	}
     	if(e.getSource() == prec){
     		container.removeAll();
+                System.out.println("container before : " + this.container);
     		int m,a;
     		if(mois==1){
     			m=12;
@@ -164,6 +172,7 @@ public class Calendrier extends JPanel implements ActionListener{
     				a=annee;}
     		container.add(new Calendrier(x0,y0,m,a,container));
     		container.repaint();
+                System.out.println("container after : " + this.container);
     	}
     }
     		

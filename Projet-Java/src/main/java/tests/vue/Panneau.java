@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package tests.vue;
+import CalendrierJpanel.SButton;
 import javax.swing.*;
 import javax.imageio.*;
 import java.awt.*;
@@ -14,17 +15,11 @@ import java.io.*;
  * @author Hippo
  */
 public class Panneau extends JPanel {
-    public void paintComponent(Graphics g){
-    try {
-      Image img = ImageIO.read(new File("image.png"));
-      g.drawImage(img, 0, 0, this);
-      //Pour une image de fond
-      //g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
-    } catch (IOException e) {
-      e.printStackTrace();
-    } 
-    g.drawString("Bienvenue sur HyperPlanning", 250, 50);
+    SButton next;
+    SButton prev;
+    public Panneau() {
+        this.next = new SButton("Next",270,0,50,28,true,this);
+        this.prev = new SButton("Prev",100,0,50,28,true,this);
+    }
     
-                   
-  } 
 }
