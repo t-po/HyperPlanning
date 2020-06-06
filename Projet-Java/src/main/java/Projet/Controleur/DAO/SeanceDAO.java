@@ -6,6 +6,9 @@ import java.sql.Time;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+
+import javax.swing.JTable;
+
 import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.Date;
