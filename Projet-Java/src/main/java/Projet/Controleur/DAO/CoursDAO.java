@@ -2,6 +2,7 @@ package Projet.Controleur.DAO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
@@ -17,11 +18,30 @@ public class CoursDAO extends DAO<Cours> {
     }
 
     public boolean update(Cours obj){
+        return false;
+    }
+
+    public void listCours(){
         try{
-            PreparedStatement statement = this.connect.prepareStatement("UPDATE cours SET NOM = ? WHERE ID = ?");
-            statement.setString(1, obj.getNom());
-            statement.setInt(2, obj.getId());
+            ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM cours");
+            while(result.next()){
+                System.out.println(result.getInt("ID")+" "+result.getString("NOM"));
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    public boolean modif(String obj,int idSeance){
+        try{
+            PreparedStatement statement = this.connect.prepareStatement("INSERT INTO cours (NOM) VALUES (?) ");
+            statement.setString(1, obj);
             statement.executeUpdate();
+            ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM cours WHERE NOM ='"+obj+"'");
+            if(result.last()){
+                Statement res = this.connect.createStatement();
+                res.execute("UPDATE seance SET ID_COURS ="+result.getInt("ID")+" WHERE ID="+idSeance);
+            }
             return true;
         }catch(SQLException e){
             e.printStackTrace();

@@ -23,6 +23,19 @@ public class GroupeDAO extends DAO<Groupe>{
         return false;
     }
 
+    public Groupe find(String nom){
+        Groupe groupe= new Groupe();
+        try{
+            ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM groupe WHERE NOM = '" + nom+"'");
+            if(result.first()){
+                groupe = new Groupe(result.getInt("ID"),result.getString("NOM"),result.getInt("ID_PROMOTION"));
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return groupe;
+    }
+
     public Groupe find(int id){
         Groupe groupe= new Groupe();
         try{
@@ -34,5 +47,20 @@ public class GroupeDAO extends DAO<Groupe>{
             e.printStackTrace();
         }
         return groupe;
+    }
+
+    public void printAllGroupe(){
+        try{
+            ResultSet res;
+            ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM groupe");
+            while(result.next()){
+                res = this.connect.createStatement().executeQuery("SELECT * FROM promotion WHERE ID="+result.getInt("ID_PROMOTION"));
+                if(res.next()){
+                    System.out.println(result.getInt("ID")+" "+result.getString("NOM")+" "+res.getString("NOM"));
+                }
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
     }
 }

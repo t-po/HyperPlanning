@@ -7,39 +7,39 @@ import Projet.Modèle.SdzConnection;
 public class DAOFactory {
     protected static final Connection conn = SdzConnection.getInstance();
 
-    public static DAO getUtilisateurDAO(){
+    public static UtilisateurDAO getUtilisateurDAO(){
         return new UtilisateurDAO(conn);
     }
 
-    public static DAO getPromotionDAO(){
+    public static PromotionDAO getPromotionDAO(){
         return new PromotionDAO(conn);
     }
 
-    public static DAO getGroupeDAO(){
+    public static GroupeDAO getGroupeDAO(){
         return new GroupeDAO(conn);
     }
 
-    public static DAO getEtudiantDAO(){
+    public static EtudiantDAO getEtudiantDAO(){
         return new EtudiantDAO(conn);
     }
 
-    public static DAO getCoursDAO(){
+    public static CoursDAO getCoursDAO(){
         return new CoursDAO(conn);
     }
 
-    public static DAO getType_coursDAO(){
+    public static Type_coursDAO getType_coursDAO(){
         return new Type_coursDAO(conn);
     }
 
-    public static DAO getSiteDAO(){
+    public static SiteDAO getSiteDAO(){
         return new SiteDAO(conn);
     }
 
-    public static DAO getSalleDAO(){
+    public static SalleDAO getSalleDAO(){
         return new SalleDAO(conn);
     }
 
-    public static DAO getSeanceDAO(){
+    public static SeanceDAO getSeanceDAO(){
         return new SeanceDAO(conn);
     }
 }
