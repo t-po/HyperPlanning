@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  sam. 06 juin 2020 à 10:32
+-- Généré le :  Dim 07 juin 2020 à 21:33
 -- Version du serveur :  5.7.26
 -- Version de PHP :  7.2.18
 
@@ -178,7 +178,7 @@ CREATE TABLE IF NOT EXISTS `seance` (
   PRIMARY KEY (`ID`),
   KEY `ID_COURS` (`ID_COURS`) USING BTREE,
   KEY `ID_TYPE` (`ID_TYPE`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `seance`
@@ -194,7 +194,13 @@ INSERT INTO `seance` (`ID`, `SEMAINE`, `DATE`, `HEURE_DEBUT`, `HEURE_FIN`, `ETAT
 (27, 23, '2020-06-12', '08:30:00', '10:00:00', 1, 3, 1),
 (28, 23, '2020-06-18', '10:15:00', '11:45:00', 1, 2, 1),
 (29, 23, '2020-06-10', '19:00:00', '20:30:00', 1, 2, 2),
-(30, 23, '2020-06-09', '13:45:00', '15:15:00', 1, 3, 2);
+(30, 23, '2020-06-09', '13:45:00', '15:15:00', 0, 3, 5),
+(31, 23, '3920-07-18', '08:30:00', '10:00:00', 1, 1, 1),
+(32, 23, '3920-07-18', '08:30:00', '10:00:00', 1, 1, 1),
+(33, 24, '2020-07-18', '08:30:00', '10:00:00', 1, 1, 5),
+(34, 23, '3920-07-12', '19:00:00', '20:30:00', 1, 3, 3),
+(35, 23, '3921-01-12', '19:00:00', '20:30:00', 1, 3, 3),
+(36, 24, '3920-07-18', '10:15:00', '11:45:00', 1, 1, 5);
 
 -- --------------------------------------------------------
 
@@ -224,7 +230,9 @@ INSERT INTO `seance_enseignants` (`ID_SEANCE`, `ID_ENSEIGNANT`) VALUES
 (27, 3),
 (28, 3),
 (29, 3),
-(30, 3);
+(30, 3),
+(35, 3),
+(36, 3);
 
 -- --------------------------------------------------------
 
@@ -254,10 +262,13 @@ INSERT INTO `seance_groupes` (`ID_SEANCE`, `ID_GROUPE`) VALUES
 (27, 5),
 (28, 5),
 (29, 5),
-(30, 5),
+(35, 5),
+(36, 5),
 (24, 7),
 (25, 7),
-(26, 7);
+(26, 7),
+(30, 7),
+(36, 7);
 
 -- --------------------------------------------------------
 
@@ -281,13 +292,18 @@ INSERT INTO `seance_salles` (`ID_SEANCE`, `ID_SALLE`) VALUES
 (21, 1),
 (27, 1),
 (28, 1),
+(36, 1),
 (22, 2),
 (26, 2),
 (29, 2),
 (30, 2),
+(36, 2),
 (23, 3),
 (24, 3),
-(25, 3);
+(25, 3),
+(30, 3),
+(35, 3),
+(36, 3);
 
 -- --------------------------------------------------------
 
@@ -321,7 +337,7 @@ CREATE TABLE IF NOT EXISTS `type_cours` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `NOM` varchar(255) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `type_cours`
@@ -330,7 +346,9 @@ CREATE TABLE IF NOT EXISTS `type_cours` (
 INSERT INTO `type_cours` (`ID`, `NOM`) VALUES
 (1, 'TD'),
 (2, 'TP'),
-(3, 'Cours');
+(3, 'Cours'),
+(4, 'TD'),
+(5, 'Cours Magistral');
 
 -- --------------------------------------------------------
 
