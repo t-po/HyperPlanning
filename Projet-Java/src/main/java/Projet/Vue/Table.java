@@ -28,7 +28,7 @@ import Projet.Modèle.Data.Utilisateur;
  * @author Hippo
  */
 public class Table extends JPanel implements ActionListener{
-    private int premJour, mois, annee, nvPremJour, semaine=23;
+    private int premJour, mois, annee, nvPremJour, semaine;
    /* private Object[][] data = {
       {"8h30-10h00", "28 ans", "1.80 m", "", "", "", "", ""},
       {"10h15-11h45", "28 ans", "1.80 m", "", "", "", "", ""},
