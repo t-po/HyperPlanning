@@ -14,21 +14,20 @@ import javax.swing.*;
  * @author Hippo
  */
 public class Fenetre extends JFrame{
-<<<<<<< HEAD
-    JPanel panel = new JPanel();
 
     public Fenetre(){
     this.setLocationRelativeTo(null);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setTitle("Table");
     this.setSize(800, 600);
-
-    Table tableau = new Table(1,6,2020, panel);
     
+    JPanel panel = new JPanel();
+    
+    
+    Table tableau = new Table(1,6,2020,panel);
     
     //Nous ajoutons notre tableau à notre contentPane dans un scroll
     //Sinon les titres des colonnes ne s'afficheront pas !
-    this.setLayout(new BorderLayout());
     this.getContentPane().add(new JScrollPane(panel));
     
     
