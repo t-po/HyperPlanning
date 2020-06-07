@@ -14,17 +14,13 @@ import java.io.*;
  * @author Hippo
  */
 public class Panneau extends JPanel {
-    public void paintComponent(Graphics g){
-    try {
-      Image img = ImageIO.read(new File("image.png"));
-      g.drawImage(img, 0, 0, this);
-      //Pour une image de fond
-      //g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
-    } catch (IOException e) {
-      e.printStackTrace();
-    } 
-    g.drawString("Bienvenue sur HyperPlanning", 250, 50);
+    String titreCour="titre du cours", prof="professeur", groupe="groupe";
     
-                   
-  } 
+    public void paintComponent(Graphics g){
+            Font contenu = new Font("Calibri", Font.PLAIN, 20);
+            g.drawString(titreCour, 300, 20);
+            g.drawString("Professeur : "+prof, 100, 60);
+            g.drawString("Groupe : "+groupe, 100, 80);
+            
+        }
 }
