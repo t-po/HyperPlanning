@@ -7,12 +7,7 @@ package Projet.Vue;
 import java.awt.*; 
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
-import java.awt.BorderLayout;
-import java.awt.Color; 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.table.*;
 
 /**
  *
@@ -22,71 +17,27 @@ public class Fenetre extends JFrame{
    
     
     public Fenetre(){
-     this.setLocationRelativeTo(null);
-    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    this.setTitle("Table");
-    this.setSize(800, 600);
+        
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setTitle("Hyper Planning");
+        this.setSize(800, 600);
    
-    //Nous ajoutons notre tableau à notre contentPane dans un scroll
-    //Sinon les titres des colonnes ne s'afficheront pas !
-    this.getContentPane().add(new JScrollPane(tableCreation()));
+        JPanel panel = new JPanel();
     
-    //Creation des parametres en fin de page
-    this.getContentPane().add(parameters(), BorderLayout.SOUTH);
-    this.getContentPane().add(toolBarre(), BorderLayout.NORTH);
-    this.setBackground(Color.green);
-    this.setVisible(true);
+        Table tableau = new Table(1,6,2020,panel);
+        //Nous ajoutons notre tableau à notre contentPane dans un scroll
+        //Sinon les titres des colonnes ne s'afficheront pas !
+        this.getContentPane().add(new JScrollPane(panel));
+    
+        //Creation des parametres en fin de page
+        this.getContentPane().add(parameters(), BorderLayout.SOUTH);
+        this.getContentPane().add(toolBarre(), BorderLayout.NORTH);
+        this.setVisible(true);
     
   }   
     
-  public JTable tableCreation() {
-        Object[][] data = {
-      {"8h30-10h00", "28 ans", "1.80 m", "", "", "", "", ""},
-      {"10h15-11h45", "28 ans", "1.80 m", "", "", "", "", ""},
-      {"12h00-13h30", "24 ans", "1.90 m", "", "", "", "", ""},
-      {"13h45-15h15", "32 ans", "1.85 m", "", "", "", "", ""},
-      {"15h30-17h00", "", "", "", "", "", "", ""},
-      {"17h15-18h45", "", "", "", "", "", "", ""},
-      {"19h00-20h30", "", "", "", "", "", "", ""}
-    };
-
-    //Les titres des colonnes
-    String  title[] = {"", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"};
-        System.out.println("3");
-    JTable tableau = new JTable(data, title);
-    
-    //font du tableau
-    tableau.setFont(new Font("Calibri",Font.PLAIN, 15));
-    
-    //font special première collone ------------ src : https://github.com/t-po/HyperPlanning/blob/dev/Projet-Java/src/main/java/tests/vue/Fenetre.java
-    DefaultTableCellRenderer diffFont = new DefaultTableCellRenderer(){
-        Font font = new Font("Calibri", Font.BOLD, 15);
-        
-        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int colunm){
-            super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, colunm);
-            setFont(font);
-            return this;
-        }
-    };
-    tableau.getColumnModel().getColumn(0).setCellRenderer(diffFont);
-    //-------------------------------
-    
-    //couleur verte pour colonne
-    DefaultTableCellRenderer diffColor = new DefaultTableCellRenderer(){
-      Color color = Color.GREEN;
-      
-      public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column){
-          super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-          setBackground(color);
-          return this;
-      }
-    };
-    tableau.getColumnModel().getColumn(0).setCellRenderer(diffColor);
-    //On agrandi la auteur de toutes les lignes.
-    tableau.setRowHeight(80);
-    System.out.println("4");
-    return tableau;
-    }
+  
  
 public JPanel parameters (){
     

@@ -4,11 +4,8 @@
  * and open the template in the editor.
  */
 package tests.vue;
-import CalendrierJpanel.SButton;
 import javax.swing.*;
-import javax.imageio.*;
 import java.awt.*;
-import java.io.*;
 
 /**
  *
@@ -16,7 +13,7 @@ import java.io.*;
  */
 public class Panneau extends JPanel {
 
-    String titreCour="titre du cours", prof="professeur", groupe="groupe";
+    private String titreCour="titre du cours", prof="professeur", groupe="groupe";
     
     public void paintComponent(Graphics g){
             Font contenu = new Font("Calibri", Font.PLAIN, 20);

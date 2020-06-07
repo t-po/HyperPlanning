@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tests.vue;
+package Projet.Vue;
 
 import CalendrierJpanel.SButton;
 import CalendrierJpanel.SButton;
