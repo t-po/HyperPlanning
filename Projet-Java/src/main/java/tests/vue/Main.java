@@ -4,6 +4,10 @@
  * and open the template in the editor.
  */
 package tests.vue;
+
+import CalendrierJpanel.Calendrier;
+import javax.swing.JPanel;
+
 /**
  *
  * @author Hippo

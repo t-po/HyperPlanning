@@ -14,7 +14,7 @@ import javax.swing.*;
 public class SLabel extends JLabel{
     public SLabel(String label,int horizental,int taillePolice,int x0,int y0,int x,int y,JPanel contentPane){
 	 	super(label);
-	 	setFont(new java.awt.Font("Monospaced", 1, taillePolice));
+	 	setFont(new java.awt.Font("Monospacede", 1, taillePolice));
         setBounds(x0,y0,x,y);
         if(horizental == 0)
         	setHorizontalAlignment(SwingConstants.LEFT);
