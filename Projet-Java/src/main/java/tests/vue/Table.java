@@ -10,11 +10,12 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
-<<<<<<< HEAD
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.Graphics;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableCellRenderer;
 
 /**
@@ -24,7 +25,6 @@ import javax.swing.table.TableCellRenderer;
 public class Table extends JPanel implements ActionListener{
     private int premJour, mois, annee, nvPremJour;
     private Object[][] data = {
-<<<<<<< HEAD
       {"8h30-10h00", "28 ans", "1.80 m", "", "", "", "", ""},
       {"10h15-11h45", "28 ans", "1.80 m", "", "", "", "", ""},
       {"12h00-13h30", "24 ans", "1.90 m", "", "", "", "", ""},
@@ -117,6 +117,7 @@ public class Table extends JPanel implements ActionListener{
 
             
             tableau.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+           
            @Override
            public void valueChanged(ListSelectionEvent e) {
                if(!e.getValueIsAdjusting()){
