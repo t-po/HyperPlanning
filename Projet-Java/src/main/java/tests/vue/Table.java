@@ -5,8 +5,8 @@
  */
 package tests.vue;
 
-import CalendrierJpanel.SButton;
-import CalendrierJpanel.SButton;
+import Projet.Vue.SButton;
+import Projet.Vue.SButton;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -19,7 +19,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableCellRenderer;
 import tests.vue.Panneau;
-import tests.vue.setCell;
+import Projet.Vue.setCell;
 
 /**
  *

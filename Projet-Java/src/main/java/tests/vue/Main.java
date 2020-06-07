@@ -5,8 +5,7 @@
  */
 package tests.vue;
 
-import CalendrierJpanel.Calendrier;
-import javax.swing.JPanel;
+
 
 /**
  *

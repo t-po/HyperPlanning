@@ -5,7 +5,7 @@
  */
 package tests.vue;
 import Projet.Vue.Table;
-import CalendrierJpanel.SButton;
+import Projet.Vue.SButton;
 import java.awt.*; 
 import java.awt.event.*;
 import javax.swing.*;

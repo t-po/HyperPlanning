@@ -5,21 +5,11 @@
  */
 package Projet.Vue;
 
-import CalendrierJpanel.SButton;
-import CalendrierJpanel.SButton;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
+import java.awt.*;
 import java.awt.Font;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
-import java.awt.Graphics;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.table.TableCellRenderer;
-import tests.vue.Panneau;
-import tests.vue.setCell;
+import javax.swing.event.*;
 
 /**
  *
@@ -27,7 +17,7 @@ import tests.vue.setCell;
  */
 public class Table extends JPanel implements ActionListener{
     private int premJour, mois, annee, nvPremJour, semaine=23;
-    private Object[][] data = {
+   /* private Object[][] data = {
       {"8h30-10h00", "28 ans", "1.80 m", "", "", "", "", ""},
       {"10h15-11h45", "28 ans", "1.80 m", "", "", "", "", ""},
       {"12h00-13h30", "24 ans", "1.90 m", "", "", "", "", ""},
@@ -35,7 +25,7 @@ public class Table extends JPanel implements ActionListener{
       {"15h30-17h00", "", "", "", "", "", "", ""},
       {"17h15-18h45", "", "", "", "", "", "", ""},
       {"19h00-20h30", "", "", "", "", "", "", ""}
-    };
+    };*/
     SButton next, prev;
     JPanel container;
     JTable tableau;
@@ -115,7 +105,7 @@ public class Table extends JPanel implements ActionListener{
         //if((this.premJour+7 <31 && mois%2 ==0) || (this.premJour+7 <30 && mois%2 ==1) || (this.premJour+7 <28 && mois ==2)){
             String title[] = {"", "Lundi" + this.premJour + "/" + this.mois, "Mardi" + mardi + "/" + this. mois, "Mercredi" + mercredi + "/" + this.mois, "Jeudi" + jeudi + "/" + this.mois, "Vendredi" + vendredi + "/" + this.mois, "Samedi" + samedi + "/" + mois, "Dimanche" + dimanche + "/" + mois};
        
-        
+            Object [][] data = (Object[][])setupCours();
             this.tableau = new JTable(data, title);
 
             
@@ -131,7 +121,7 @@ public class Table extends JPanel implements ActionListener{
            }
                 
             });
-        //}
+        
         
         
         
@@ -234,12 +224,12 @@ public class Table extends JPanel implements ActionListener{
         }
     }
     
-    private void setupCours(){
+    private Object setupCours(){
         //ranger les séances de cours par heure et date
         int annee, mois, jour;
         String heure, nom;
         Object[][] data = {
-      {"8h30-10h00", " ", " ", "", "", "", "", ""},
+      {"8h30-10h00", "le chevalier", " ", "", "", "", "", ""},
       {"10h15-11h45", "", "", "", "", "", "", ""},
       {"12h00-13h30", "", "", "", "", "", "", ""},
       {"13h45-15h15", "", "", "", "", "", "", ""},
@@ -248,7 +238,7 @@ public class Table extends JPanel implements ActionListener{
       {"19h00-20h30", "", "", "", "", "", "", ""}
     };
         
-        
+        return data;
     }
     
     private void detailCour(){
