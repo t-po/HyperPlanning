@@ -26,11 +26,38 @@ public class UtilisateurDAO extends DAO<Utilisateur>{
     public Utilisateur connexion(String email, String passwd){
         Utilisateur utilisateur = new Utilisateur();
         try{
-            ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM utilisateur WHERE EMAIL = "+email+"AND PASSWD = "+passwd);
+            ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM utilisateur WHERE EMAIL = '"+email+"' AND PASSWD = '"+passwd+"'");
             if(result.first()){
                 utilisateur = new Utilisateur(result.getInt("ID"),result.getString("EMAIL"),result.getString("PASSWD"),result.getString("NOM"),result.getString("PRENOM"),result.getInt("DROIT"));
             }
         }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return utilisateur;
+    }
+
+    public void printAllEnseignant(){
+        Utilisateur enseignant = new Utilisateur();
+        try{
+            ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM utilisateur WHERE DROIT = "+3);
+            while(result.next()){
+                enseignant = find(result.getInt("ID"));
+                System.out.println(enseignant.getId()+" "+enseignant.getEmail()+" "+enseignant.getNom()+" "+enseignant.getPrenom());
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+    public Utilisateur find(String nom){
+        Utilisateur utilisateur = new Utilisateur();
+        try{
+            ResultSet result = this.connect.createStatement(
+                ResultSet.TYPE_SCROLL_INSENSITIVE, 
+                ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM utilisateur WHERE NOM = '"+nom+"'");
+            if(result.first()){
+                utilisateur = new Utilisateur(result.getInt("ID"),result.getString("EMAIL"),result.getString("PASSWD"),result.getString("NOM"),result.getString("PRENOM"),result.getInt("DROIT"));
+            }
+        } catch (SQLException e){
             e.printStackTrace();
         }
         return utilisateur;

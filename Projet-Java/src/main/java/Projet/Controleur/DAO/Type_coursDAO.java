@@ -2,6 +2,7 @@ package Projet.Controleur.DAO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.sql.Connection;
 
@@ -17,11 +18,30 @@ public class Type_coursDAO extends DAO<Type_cours> {
     }
 
     public boolean update(Type_cours obj){
+        return false;
+    }
+
+    public void listType(){
         try{
-            PreparedStatement statement = this.connect.prepareStatement("UPDATE type_cours SET NOM = ? WHERE ID = ?");
-            statement.setString(1, obj.getNom());
-            statement.setInt(2, obj.getId());
+            ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM type_cours");
+            while(result.next()){
+                System.out.println(result.getInt("ID")+" "+result.getString("NOM"));
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    public boolean modif(String obj, int idSeance){
+        try{
+            PreparedStatement statement = this.connect.prepareStatement("INSERT INTO type_cours (NOM) VALUES (?)");
+            statement.setString(1, obj);
             statement.executeUpdate();
+            ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM type_cours WHERE NOM ='"+obj+"'");
+            if(result.last()){
+                Statement res = this.connect.createStatement();
+                res.execute("UPDATE seance SET ID_TYPE ="+result.getInt("ID")+" WHERE ID="+idSeance);
+            }
             return true;
         }catch(SQLException e){
             e.printStackTrace();

@@ -23,6 +23,20 @@ public class SalleDAO extends DAO<Salle>{
         return false;
     }
 
+    public void printAllSalle(){
+        try{
+            ResultSet res;
+            ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM salle");
+            while(result.next()){
+                res = this.connect.createStatement().executeQuery("SELECT * FROM site WHERE ID= "+result.getInt("ID_SITE"));
+                res.next();
+                System.out.println(result.getInt("ID")+" "+result.getString("NOM")+" "+result.getInt("CAPACITE")+" "+res.getString("NOM"));
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+
     public Salle find(int id){
         Salle salle = new Salle();
         try{
