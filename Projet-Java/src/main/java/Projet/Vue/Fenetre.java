@@ -26,7 +26,7 @@ public class Fenetre extends JFrame{
         this.setSize(800, 600);
         JPanel panel = new JPanel();
     
-        Table tableau = new Table(8,6,2020,panel,utilisateur);
+        Table tableau = new Table(8,6,2020,panel,utilisateur,23);
         //Nous ajoutons notre tableau à notre contentPane dans un scroll
         //Sinon les titres des colonnes ne s'afficheront pas !
         this.getContentPane().add(new JScrollPane(panel));

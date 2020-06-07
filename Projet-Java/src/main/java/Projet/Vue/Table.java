@@ -49,8 +49,9 @@ public class Table extends JPanel implements ActionListener{
 
     
     
-    public Table(int premJour, int mois, int annee, JPanel container, Utilisateur utilisateur){
+    public Table(int premJour, int mois, int annee, JPanel container, Utilisateur utilisateur, int semaine){
         this.container = container;
+        this.semaine = semaine;
         this.utilisateur = utilisateur;
         System.out.println("Table begin");
         System.out.println("date entrée : "+premJour+"/"+mois+"/"+annee);
@@ -181,7 +182,7 @@ public class Table extends JPanel implements ActionListener{
             this.semaine--;
         }
 
-            new Table(this.premJour,this.mois,this.annee, this.container, this.utilisateur);
+            new Table(this.premJour,this.mois,this.annee, this.container, this.utilisateur,this.semaine);
             this.container.revalidate();
             this.container.repaint();
             this.container.updateUI();
