@@ -15,11 +15,14 @@ import java.io.*;
  * @author Hippo
  */
 public class Panneau extends JPanel {
-    SButton next;
-    SButton prev;
-    public Panneau() {
-        this.next = new SButton("Next",270,0,50,28,true,this);
-        this.prev = new SButton("Prev",100,0,50,28,true,this);
-    }
+
+    String titreCour="titre du cours", prof="professeur", groupe="groupe";
     
+    public void paintComponent(Graphics g){
+            Font contenu = new Font("Calibri", Font.PLAIN, 20);
+            g.drawString(titreCour, 300, 20);
+            g.drawString("Professeur : "+prof, 100, 60);
+            g.drawString("Groupe : "+groupe, 100, 80);
+            
+        }
 }

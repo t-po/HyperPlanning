@@ -31,4 +31,6 @@ public class setCell {
         };
         tableau.getColumnModel().getColumn(0).setCellRenderer(premCol);
     }
+
 }
+

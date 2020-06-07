@@ -10,9 +10,12 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
+<<<<<<< HEAD
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
+import java.awt.Graphics;
+import javax.swing.table.TableCellRenderer;
 
 /**
  *
@@ -21,6 +24,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 public class Table extends JPanel implements ActionListener{
     private int premJour, mois, annee, nvPremJour;
     private Object[][] data = {
+<<<<<<< HEAD
       {"8h30-10h00", "28 ans", "1.80 m", "", "", "", "", ""},
       {"10h15-11h45", "28 ans", "1.80 m", "", "", "", "", ""},
       {"12h00-13h30", "24 ans", "1.90 m", "", "", "", "", ""},
@@ -29,13 +33,13 @@ public class Table extends JPanel implements ActionListener{
       {"17h15-18h45", "", "", "", "", "", "", ""},
       {"19h00-20h30", "", "", "", "", "", "", ""}
     };
-    SButton next;
-    SButton prev;
+    SButton next, prev;
     JPanel container;
     JTable tableau;
 
     //Les titres des colonnes
     
+
     
     
     public Table(int premJour, int mois, int annee, JPanel container){
@@ -55,7 +59,8 @@ public class Table extends JPanel implements ActionListener{
         return this.container;
     }
     
-    public void creationTable(){
+
+    private void creationTable(){
         /*this.next = new SButton("Next",270,0,50,28,true,this);
         this.prev = new SButton("Prev",100,0,50,28,true,this);
         this.prev.addActionListener(this);
@@ -109,6 +114,19 @@ public class Table extends JPanel implements ActionListener{
        
         
             this.tableau = new JTable(data, title);
+
+            
+            tableau.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+           @Override
+           public void valueChanged(ListSelectionEvent e) {
+               if(!e.getValueIsAdjusting()){
+                   int selectedRow = tableau.getSelectedRow();
+                   recupInfos(tableau,selectedRow);
+                   detailCour();
+               }
+           }
+                
+            });
         //}
         
         
@@ -125,7 +143,8 @@ public class Table extends JPanel implements ActionListener{
         //return tableau;
     }
     
-    public JPanel creationBtn(){
+
+    private JPanel creationBtn(){
         JPanel panel = new JPanel();
         this.next = new SButton("Prev",100,0,50,28,true,this);
         this.prev = new SButton("Next", 270,0,50,28,true,this);
@@ -151,6 +170,7 @@ public class Table extends JPanel implements ActionListener{
         if(e.getSource() == this.next){
             this.premJour--;
         }
+
             new Table(this.premJour,this.mois,this.annee, this.container);
             this.container.revalidate();
             this.container.repaint();
@@ -197,6 +217,42 @@ public class Table extends JPanel implements ActionListener{
         System.out.println("retour : "+retour);
     	return (retour);
     }
+
+
+
+    
+    protected static void recupInfos(JTable table, int selectedRow) {
+        if ( selectedRow>=0 ) {
+            for(int i=0; i<table.getColumnCount(); i++) {
+                int column = table.convertColumnIndexToView(i); 
+                System.out.println(String.valueOf(table.getValueAt(selectedRow,column)));
+            }
+        }
+    }
+    
+    /*private void setupCours(){
+        //ranger les séances de cours par heure et date
+        int annee, mois, jour;
+        String heure, nom;
+        Object[][] data = {
+            {heure, nom1, nom2, nom3, nom4, nom5, nom6, nom7}
+        };
+        data = data+{""};
+        
+        
+    }*/
+    
+    private void detailCour(){
+        SButton retour=new SButton("retour",500,100,600,150,true,container);
+        
+        
+        this.container.removeAll();
+        System.out.print("ici!!");
+        retour.addActionListener(this);
+        this.container.add( new Panneau());
+        this.container.add(retour, BorderLayout.SOUTH);
+        this.container.revalidate();
+            this.container.repaint();
+            this.container.updateUI();
+    }
 }
-
-
