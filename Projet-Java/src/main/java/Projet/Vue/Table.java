@@ -8,8 +8,20 @@ package Projet.Vue;
 import java.awt.*;
 import java.awt.Font;
 import java.awt.event.*;
+import java.util.Iterator;
+
 import javax.swing.*;
 import javax.swing.event.*;
+
+import Projet.Controleur.DAO.CoursDAO;
+import Projet.Controleur.DAO.DAOFactory;
+import Projet.Controleur.DAO.SeanceDAO;
+import Projet.Controleur.DAO.Type_coursDAO;
+import Projet.Modèle.Data.Cours;
+import Projet.Modèle.Data.Salle;
+import Projet.Modèle.Data.Seance;
+import Projet.Modèle.Data.Type_cours;
+import Projet.Modèle.Data.Utilisateur;
 
 /**
  *
@@ -26,17 +38,20 @@ public class Table extends JPanel implements ActionListener{
       {"17h15-18h45", "", "", "", "", "", "", ""},
       {"19h00-20h30", "", "", "", "", "", "", ""}
     };*/
+    private Utilisateur utilisateur;
     SButton next, prev;
     JPanel container;
     JTable tableau;
+    Object[][] tableauID;
 
     //Les titres des colonnes
     
 
     
     
-    public Table(int premJour, int mois, int annee, JPanel container){
+    public Table(int premJour, int mois, int annee, JPanel container, Utilisateur utilisateur){
         this.container = container;
+        this.utilisateur = utilisateur;
         System.out.println("Table begin");
         System.out.println("date entrée : "+premJour+"/"+mois+"/"+annee);
         this.premJour = jour(annee,mois,premJour); this.mois = mois; this.annee = annee; this.nvPremJour=this.premJour;
@@ -57,7 +72,7 @@ public class Table extends JPanel implements ActionListener{
         /*this.next = new SButton("Next",270,0,50,28,true,this);
         this.prev = new SButton("Prev",100,0,50,28,true,this);
         this.prev.addActionListener(this);
-	this.next.addActionListener(this);*/
+	    this.next.addActionListener(this);*/
        int mardi=0, mercredi=0, jeudi=0, vendredi=0, samedi=0, dimanche=0;
         if((premJour+7>31 && mois%2!=0) || (premJour+7>30 && mois%2==0) || (premJour+7>28 && mois==2 && (annee-2020)%4!=0)  || (premJour+7>29 && mois==2 && (annee-2020)%4==0)){
             for(int i=1; i<7; i++ ){
@@ -109,17 +124,16 @@ public class Table extends JPanel implements ActionListener{
             this.tableau = new JTable(data, title);
 
             
-            tableau.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
-           
-           @Override
-           public void valueChanged(ListSelectionEvent e) {
-               if(!e.getValueIsAdjusting()){
-                   int selectedRow = tableau.getSelectedRow();
-                   recupInfos(tableau,selectedRow);
-                   detailCour();
-               }
-           }
-                
+            tableau.addMouseListener(new java.awt.event.MouseAdapter() {
+                @Override
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    int row = tableau.rowAtPoint(evt.getPoint());
+                    int col = tableau.columnAtPoint(evt.getPoint());
+                    if (row >= 0 && col >= 1) {
+                        recupInfos(tableau, row,col);
+                        detailCour(row,col);
+                    }
+                }
             });
         
         
@@ -159,13 +173,15 @@ public class Table extends JPanel implements ActionListener{
         if (e.getSource() == this.prev){
             this.premJour=this.nvPremJour;
             this.premJour++;
+            this.semaine++;
             System.out.println("ta race"+premJour);
         }
         if(e.getSource() == this.next){
             this.premJour--;
+            this.semaine--;
         }
 
-            new Table(this.premJour,this.mois,this.annee, this.container);
+            new Table(this.premJour,this.mois,this.annee, this.container, this.utilisateur);
             this.container.revalidate();
             this.container.repaint();
             this.container.updateUI();
@@ -215,12 +231,9 @@ public class Table extends JPanel implements ActionListener{
 
 
     
-    protected static void recupInfos(JTable table, int selectedRow) {
+    protected static void recupInfos(JTable table, int selectedRow, int selectedCol) {
         if ( selectedRow>=0 ) {
-            for(int i=0; i<table.getColumnCount(); i++) {
-                int column = table.convertColumnIndexToView(i); 
-                System.out.println(String.valueOf(table.getValueAt(selectedRow,column)));
-            }
+            System.out.println(String.valueOf(table.getValueAt(selectedRow,selectedCol)));
         }
     }
     
@@ -228,8 +241,27 @@ public class Table extends JPanel implements ActionListener{
         //ranger les séances de cours par heure et date
         int annee, mois, jour;
         String heure, nom;
+        SeanceDAO seanceDAO = DAOFactory.getSeanceDAO();
+        CoursDAO coursDAO = DAOFactory.getCoursDAO();
+        Type_coursDAO type_coursDAO = DAOFactory.getType_coursDAO();
+        Iterator<Seance> it =seanceDAO.listeSeance(utilisateur).iterator();
+        Iterator<Salle> salleIt;
+        Seance seance;
+        Cours cours;
+        Type_cours type_cours;
+        Salle salle;
+        Object[][] tableauIDbuff = {
+            {"8h30-10h00", "", "", "", "", "", "", ""},
+            {"10h15-11h45", "", "", "", "", "", "", ""},
+            {"12h00-13h30", "", "", "", "", "", "", ""},
+            {"13h45-15h15", "", "", "", "", "", "", ""},
+            {"15h30-17h00", "", "", "", "", "", "", ""},
+            {"17h15-18h45", "", "", "", "", "", "", ""},
+            {"19h00-20h30", "", "", "", "", "", "", ""}
+          };
+        tableauID = tableauIDbuff;
         Object[][] data = {
-      {"8h30-10h00", "le chevalier", " ", "", "", "", "", ""},
+      {"8h30-10h00", "", "", "", "", "", "", ""},
       {"10h15-11h45", "", "", "", "", "", "", ""},
       {"12h00-13h30", "", "", "", "", "", "", ""},
       {"13h45-15h15", "", "", "", "", "", "", ""},
@@ -237,18 +269,54 @@ public class Table extends JPanel implements ActionListener{
       {"17h15-18h45", "", "", "", "", "", "", ""},
       {"19h00-20h30", "", "", "", "", "", "", ""}
     };
-        
+        while(it.hasNext()){
+            seance = it.next();
+            cours = coursDAO.find(seance.getId_cours());
+            type_cours = type_coursDAO.find(seance.getId_type());
+            salleIt = seance.getListSalle().iterator();
+            salle = salleIt.next();
+            if(seance.getSemaine()==semaine){
+                if(seance.getHeure_debut().getHours()==8&&seance.getHeure_debut().getMinutes()==30){
+                    data[0][seance.getDate().getDay()]=cours.getNom();
+                    tableauID[0][seance.getDate().getDay()]=seance.getId();
+                }
+                if(seance.getHeure_debut().getHours()==10&&seance.getHeure_debut().getMinutes()==15){
+                    data[1][seance.getDate().getDay()]=cours.getNom();
+                    tableauID[1][seance.getDate().getDay()]=seance.getId();
+                }
+                if(seance.getHeure_debut().getHours()==12&&seance.getHeure_debut().getMinutes()==0){
+                    data[2][seance.getDate().getDay()]=cours.getNom();
+                    tableauID[2][seance.getDate().getDay()]=seance.getId();
+                }
+                if(seance.getHeure_debut().getHours()==13&&seance.getHeure_debut().getMinutes()==45){
+                    data[3][seance.getDate().getDay()]=cours.getNom();
+                    tableauID[3][seance.getDate().getDay()]=seance.getId();
+                }
+                if(seance.getHeure_debut().getHours()==15&&seance.getHeure_debut().getMinutes()==30){
+                    data[4][seance.getDate().getDay()]=cours.getNom();
+                    tableauID[4][seance.getDate().getDay()]=seance.getId();
+                }
+                if(seance.getHeure_debut().getHours()==17&&seance.getHeure_debut().getMinutes()==15){
+                    data[5][seance.getDate().getDay()]=cours.getNom();
+                    tableauID[5][seance.getDate().getDay()]=seance.getId();
+                }
+                if(seance.getHeure_debut().getHours()==19&&seance.getHeure_debut().getMinutes()==0){
+                    data[6][seance.getDate().getDay()]=cours.getNom();
+                    tableauID[6][seance.getDate().getDay()]=seance.getId();
+                }
+            }
+        }
         return data;
     }
     
-    private void detailCour(){
+    private void detailCour(int row,int col){
         SButton retour=new SButton("retour",500,100,600,150,true,container);
         
         
         this.container.removeAll();
         System.out.print("ici!!");
         retour.addActionListener(this);
-        this.container.add( new Panneau());
+        this.container.add( new Panneau(row,col,tableauID[row][col]));
         this.container.add(retour, BorderLayout.SOUTH);
         this.container.revalidate();
             this.container.repaint();

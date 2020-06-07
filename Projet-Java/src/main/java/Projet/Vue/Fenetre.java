@@ -9,6 +9,8 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.table.*;
 
+import Projet.Modèle.Data.Utilisateur;
+
 /**
  *
  * @author Hippo
@@ -16,16 +18,15 @@ import javax.swing.table.*;
 public class Fenetre extends JFrame{
    
     
-    public Fenetre(){
+    public Fenetre(Utilisateur utilisateur){
         
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("Hyper Planning");
         this.setSize(800, 600);
-   
         JPanel panel = new JPanel();
     
-        Table tableau = new Table(1,6,2020,panel);
+        Table tableau = new Table(8,6,2020,panel,utilisateur);
         //Nous ajoutons notre tableau à notre contentPane dans un scroll
         //Sinon les titres des colonnes ne s'afficheront pas !
         this.getContentPane().add(new JScrollPane(panel));

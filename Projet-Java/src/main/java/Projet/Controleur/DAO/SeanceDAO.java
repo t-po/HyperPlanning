@@ -44,7 +44,7 @@ public class SeanceDAO extends DAO<Seance>{
             if(result.first()){
                 idGroupe = result.getInt("ID_GROUPE");
             }
-            result = this.connect.createStatement().executeQuery("SELECT * FROM SEANCE_GROUPE WHERE ID_GROUPE = "+ idGroupe);
+            result = this.connect.createStatement().executeQuery("SELECT * FROM seance_groupes WHERE ID_GROUPE = "+ idGroupe);
             while(result.next()){
                 listSeance.add(find(result.getInt("ID_SEANCE")));
             }

@@ -23,16 +23,28 @@ public class Connexion extends JFrame{
     
     private JTextField tfMail = new JTextField();
     private JPasswordField tfPassword = new JPasswordField(10);
-    
+    private boolean wait = false;
   public Connexion(){
 
     this.setLocationRelativeTo(null);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setTitle("Connexion");
-    this.setSize(700, 75);
+    this.setSize(700, 100);
     this.setVisible(true);
     this.getContentPane().add(parameters(), BorderLayout.CENTER);
     
+    }
+
+    public String getMail(){
+      return tfMail.getText();
+    }
+
+    public String getMdp(){
+      return tfPassword.getText();
+    }
+  
+    public boolean attendre(){
+      return wait;
     }
     
     
@@ -75,6 +87,7 @@ public JPanel parameters(){
     public void actionPerformed(ActionEvent e) {
       System.out.println(tfMail.getText());
       System.out.println(tfPassword.getText());
+      wait=true;
     }
   }
         

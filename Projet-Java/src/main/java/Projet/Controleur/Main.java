@@ -6,24 +6,33 @@ import java.util.Scanner;
 
 import Projet.Controleur.DAO.*;
 import Projet.Modèle.Data.*;
+import Projet.Vue.Connexion;
+import Projet.Vue.Fenetre;
 
 public class Main {
     public static void main(String[] args) {
         int test = 0;
+        UtilisateurDAO utilisateurDAO = DAOFactory.getUtilisateurDAO();
+        SeanceDAO seanceDAO = DAOFactory.getSeanceDAO();
+        SalleDAO salleDAO = DAOFactory.getSalleDAO();
+        GroupeDAO groupeDAO = DAOFactory.getGroupeDAO();
+        CoursDAO coursDAO = DAOFactory.getCoursDAO();
+        Type_coursDAO type_coursDAO = DAOFactory.getType_coursDAO();
         Scanner input = new Scanner(System.in);
+        boolean testbool=false;
         System.out.println("1-Test utilisateur\n2-Test administrateur");
         test = input.nextInt();
         input.nextLine();
         if(test == 1){
-
+            Utilisateur pers = utilisateurDAO.connexion("adrien@gmail.com", "passwd");
+            Connexion con = new Connexion();
+            Fenetre fenetre = new Fenetre(pers);
+            Utilisateur personne = utilisateurDAO.connexion(con.getMail(), con.getMdp());
+            if(personne.getId()!=0){
+                System.out.println("IN");
+            }
         }
         if(test == 2){
-            UtilisateurDAO utilisateurDAO = DAOFactory.getUtilisateurDAO();
-            SeanceDAO seanceDAO = DAOFactory.getSeanceDAO();
-            SalleDAO salleDAO = DAOFactory.getSalleDAO();
-            GroupeDAO groupeDAO = DAOFactory.getGroupeDAO();
-            CoursDAO coursDAO = DAOFactory.getCoursDAO();
-            Type_coursDAO type_coursDAO = DAOFactory.getType_coursDAO();
             boolean co = false;
             String mail,mdp;
             int idP = 0,idS=0, idG=0,idSalle=0, modif = 0;

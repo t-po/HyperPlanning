@@ -4,13 +4,17 @@
  * and open the template in the editor.
  */
 package Projet.Vue;
+
+import Projet.Modèle.Data.Utilisateur;
+
 /**
  *
  * @author Hippo
  */
 public class Main {
     public static void main(String[] args){
-    Fenetre fenetre = new Fenetre();
+    Utilisateur utilisateur = new Utilisateur();
+    Fenetre fenetre = new Fenetre(utilisateur);
     Connexion con = new Connexion();
     }
 }
